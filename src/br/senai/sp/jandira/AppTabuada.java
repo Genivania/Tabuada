@@ -1,10 +1,9 @@
 package br.senai.sp.jandira;
 
-public class Tabuada {
+
+public class AppTabuada {
 
 	public static void main(String[] args) {
 		
-
-	}
 
 }
