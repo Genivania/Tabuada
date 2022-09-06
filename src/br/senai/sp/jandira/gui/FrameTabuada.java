@@ -6,6 +6,7 @@ import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class FrameTabuada {
 
@@ -33,15 +34,32 @@ public class FrameTabuada {
 		
 		// Criar os componentes da tela e colocar no painel (container)
 		JLabel labelTabuada = new JLabel();
-		labelTabuada.setText("tabuada");
-		labelTabuada.setBounds(230, 15, 300, 30);
-		labelTabuada.setForeground(new Color(0, 230, 230));
+		labelTabuada.setText(" Tabuada 1.0");
+		labelTabuada.setBounds(200, 15, 700, 30);
+		labelTabuada.setForeground(new Color(237, 28, 36));
+		labelTabuada.setFont(new Font("Arial", Font.BOLD, 30)); 
+		
+		
+//		JLabel labelExplicacao = new JLabel();
+//		labelExplicacao.setText("Com a tabuada 1.0 os seus problemas acabaram. Calcule a tabuada que desejar em segundos!");
+//		labelExplicacao.setBounds(30, 40, 700, 30);
+//		labelExplicacao.setForeground(new Color(128, 128, 128));
+//		labelExplicacao.setFont(new Font("Arial", Font.BOLD, 15)); 
+		
+		JLabel labelMultiplicando = new JLabel();
+		labelMultiplicando.setText("Multiplicando: ");
+		labelMultiplicando.setBounds(50, 110, 300, 30);
+		JTextField textFildMultiplicando = new JTextField();
+		textFildMultiplicando.setBounds(25, 300, 15, 0);
 		
 		
 		
 		//adicionar componentes
 		painel.add(labelTabuada);
+		//painel.add(labelExplicacao);
+		painel.add(labelMultiplicando);
 		
+
 		
 		tela.setVisible(true);
 		
