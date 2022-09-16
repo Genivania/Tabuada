@@ -3,7 +3,7 @@ package br.senai.sp.jandira;
 import java.awt.Color;
 import java.awt.Font;
 
-//import javax.swing.ImageIcon;
+import javax.swing.ImageIcon;
 import javax.swing.event.InternalFrameAdapter;
 
 import br.senai.sp.jandira.gui.FrameTabuada;

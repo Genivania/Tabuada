@@ -3,9 +3,13 @@ package br.senai.sp.jandira.gui;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +19,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import br.senai.sp.jandira.model.EstruturaTabuada;
-
 
 
 
@@ -30,12 +33,8 @@ public class FrameTabuada {
 	public Color corDoCalcular;
 	public Font fontDoCalcular;
 	public Color corDaFonteCalcular;
-	
-	
-	
-	
 
-	
+
 	public void criarTela() {
 		
 		JFrame tela = new JFrame();
@@ -50,6 +49,13 @@ public class FrameTabuada {
 		
 		
 		// Criar os componentes da tela e colocar no painel (container)
+		
+		ImageIcon imagem = new ImageIcon(getClass().getResource("calculadora.png"));
+		JLabel labelImagem = new JLabel(imagem);
+		
+		//labelImagem.setBounds(25, 20, 50, 30);
+		
+		
 		JLabel labelTabuada = new JLabel();
 		labelTabuada.setText(" Tabuada 1.0");
 		labelTabuada.setBounds(100, 15, 700, 30);
@@ -119,28 +125,7 @@ public class FrameTabuada {
 		lista.setForeground(corDaLetraDaTabuada);
 		
 		
-		buttonCalcular.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				if (textFildMultiplicando.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, "Multiplicando é obrigatório");
-					textFildMultiplicando.requestFocus();
-				}
-				else {
-					EstruturaTabuada tabuada = new EstruturaTabuada();
-					tabuada.multiplicador = Integer.parseInt(textFildMultiplicando.getText());
-					tabuada.minimoMult = Integer.parseInt(textFildMinimoMulti.getText());
-					tabuada.maximoMult = Integer.parseInt(textFildMaximoMulti.getText());
-					
-					lista.setListData(tabuada.getTabuada());
-				}
-			
-			}
-		});
-		
-		
+		//botões
 		JButton buttonLimpar = new JButton();
 		buttonLimpar.setText("Limpar ");
 		buttonLimpar.setBounds(330, 300, 200, 50);
@@ -153,6 +138,99 @@ public class FrameTabuada {
 		labelResultado.setText(" Resultado:");
 		labelResultado.setBounds(28, 380, 700, 30);
 		labelResultado.setFont(new Font("Arial", Font.BOLD, 20)); 
+
+	buttonCalcular.addActionListener(new ActionListener() {
+			
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (textFildMultiplicando.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Multiplicando é obrigatório");
+					textFildMultiplicando.requestFocus();	
+				}
+				else if(textFildMinimoMulti.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Mínino multiplicador é obrigatório");
+					textFildMinimoMulti.requestFocus();
+				}
+				else if(textFildMaximoMulti.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Máximo multiplicador é obrigatório");
+					textFildMaximoMulti.requestFocus();
+				}
+				
+				else {
+					EstruturaTabuada tabuada = new EstruturaTabuada();
+					tabuada.multiplicador = Integer.parseInt(textFildMultiplicando.getText());
+					tabuada.minimoMult = Integer.parseInt(textFildMinimoMulti.getText());
+					
+					if (tabuada.maximoMult < tabuada.minimoMult) {
+						JOptionPane.showMessageDialog(null, "Máximo multiplicador tem que ser maior que o mínimo", "ERRO", JOptionPane.ERROR_MESSAGE);
+					}
+					
+					lista.setListData(tabuada.getTabuada());
+				}
+			}
+	});
+	
+	
+	buttonLimpar.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			textFildMultiplicando.setText("");
+			textFildMinimoMulti.setText("");
+			textFildMaximoMulti.setText("");
+			lista.setVisible(false);
+		}
+	});
+	
+	textFildMultiplicando.addKeyListener(new KeyListener() {
+		
+		@Override
+		public void keyTyped(KeyEvent e) {	
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
+			textFildMultiplicando.setText(textFildMultiplicando.getText().replaceAll("[^0-9]",""));
+		}
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+	
+		}
+	});
+
+	textFildMinimoMulti.addKeyListener(new KeyListener() {
+		
+		@Override
+		public void keyTyped(KeyEvent e) {
+	
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
+			textFildMinimoMulti.setText(textFildMinimoMulti.getText().replaceAll("[^0-9]",""));
+		}
+		@Override
+		public void keyPressed(KeyEvent e) {
+		}
+	});
+	
+	textFildMaximoMulti.addKeyListener(new KeyListener() {
+		
+		@Override
+		public void keyTyped(KeyEvent e) {
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
+			textFildMaximoMulti.setText(textFildMaximoMulti.getText().replaceAll("[^0-9", ""));
+		}
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+		}
+	});
 
 		
 		//adicionar componentes
@@ -169,6 +247,7 @@ public class FrameTabuada {
 		painel.add(buttonLimpar);
 		painel.add(labelResultado);
 		painel.add(scroll);
+		painel.add(labelImagem);
 		
 
 		tela.setVisible(true);
@@ -179,3 +258,4 @@ public class FrameTabuada {
 	
 	
 }
+		
